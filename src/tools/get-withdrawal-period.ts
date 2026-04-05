@@ -10,12 +10,12 @@ interface WithdrawalPeriodArgs {
 }
 
 const WITHDRAWAL_DISCLAIMER =
-  'IMPORTANT: These withdrawal periods are for standard dosing as stated in the SPC. ' +
-  'If a different dose, route, or frequency was used (including under the cascade), ' +
-  'minimum statutory withdrawal periods apply instead. ALWAYS check the actual Summary ' +
-  'of Product Characteristics (SPC) for your specific product, dose, and route before ' +
-  'sending animals or animal products into the food chain. Errors in withdrawal period ' +
-  'compliance can result in medicine residues in food — a food safety and legal offence.';
+  'VIGTIGT: Tilbageholdelsestiderne gælder standarddosering jf. produktresuméet (SPC). ' +
+  'Ved afvigende dosis, administrationsvej eller frekvens (herunder kaskadereglen) ' +
+  'gælder lovbestemte minimumstilbageholdelsestider. Kontrollér ALTID det specifikke ' +
+  'produktresumé for dit præparat, dosis og administrationsvej inden levering af dyr ' +
+  'eller animalske produkter til fødevarekæden. Fejl i tilbageholdelsestider kan ' +
+  'medføre restkoncentrationer i fødevarer — et fødevaresikkerheds- og strafferetligt problem.';
 
 export function handleGetWithdrawalPeriod(db: Database, args: WithdrawalPeriodArgs) {
   const jv = validateJurisdiction(args.jurisdiction);
@@ -84,7 +84,7 @@ export function handleGetWithdrawalPeriod(db: Database, args: WithdrawalPeriodAr
     spc_url: medicine.spc_url,
     warning: WITHDRAWAL_DISCLAIMER,
     _meta: buildMeta({
-      source_url: medicine.spc_url || 'https://www.vmd.defra.gov.uk/productinformationdatabase/',
+      source_url: medicine.spc_url || 'https://laegemiddelstyrelsen.dk/da/veterinaeromraadet/',
     }),
   };
 }

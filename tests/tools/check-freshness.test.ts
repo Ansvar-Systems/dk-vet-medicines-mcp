@@ -43,7 +43,7 @@ describe('check_data_freshness tool', () => {
   test('includes refresh command', () => {
     const result = handleCheckFreshness(db);
     expect(result.refresh_command).toContain('gh workflow run');
-    expect(result.refresh_command).toContain('uk-vet-medicines-mcp');
+    expect(result.refresh_command).toContain('dk-vet-medicines-mcp');
   });
 
   test('includes schema_version', () => {

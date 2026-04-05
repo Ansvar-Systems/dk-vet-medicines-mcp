@@ -17,9 +17,9 @@ describe('list_sources tool', () => {
     if (existsSync(TEST_DB)) unlinkSync(TEST_DB);
   });
 
-  test('returns 3 data sources', () => {
+  test('returns 5 data sources', () => {
     const result = handleListSources(db);
-    expect(result.sources).toHaveLength(3);
+    expect(result.sources).toHaveLength(5);
   });
 
   test('each source has required fields', () => {
@@ -32,10 +32,10 @@ describe('list_sources tool', () => {
     }
   });
 
-  test('includes VMD as a source', () => {
+  test('includes Foedevarestyrelsen as a source', () => {
     const result = handleListSources(db);
-    const vmd = result.sources.find(s => s.name.includes('VMD'));
-    expect(vmd).toBeDefined();
+    const fvst = result.sources.find(s => s.name.includes('Fødevarestyrelsen'));
+    expect(fvst).toBeDefined();
   });
 
   test('includes _meta', () => {

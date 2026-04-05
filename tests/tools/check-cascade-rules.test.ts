@@ -20,8 +20,8 @@ describe('check_cascade_rules tool', () => {
 
   test('returns cascade steps in order', () => {
     const result = handleCheckCascadeRules(db, {
-      species: 'cattle',
-      condition: 'respiratory infection',
+      species: 'kvæg',
+      condition: 'luftvejsinfektion',
     });
     expect(result).toHaveProperty('cascade_steps');
     const steps = (result as { cascade_steps: { step: number }[] }).cascade_steps;
@@ -31,8 +31,8 @@ describe('check_cascade_rules tool', () => {
 
   test('step 2 has default withdrawal periods', () => {
     const result = handleCheckCascadeRules(db, {
-      species: 'sheep',
-      condition: 'footrot',
+      species: 'svin',
+      condition: 'diarré',
     });
     const steps = (result as { cascade_steps: { step: number; default_withdrawal_periods: { meat_days: number; milk_days: number } }[] }).cascade_steps;
     const step2 = steps.find(s => s.step === 2);
@@ -43,18 +43,18 @@ describe('check_cascade_rules tool', () => {
 
   test('includes guidance text with species and condition', () => {
     const result = handleCheckCascadeRules(db, {
-      species: 'cattle',
+      species: 'kvæg',
       condition: 'mastitis',
     });
     expect(result).toHaveProperty('guidance');
     const guidance = (result as { guidance: string }).guidance;
-    expect(guidance).toContain('cattle');
+    expect(guidance).toContain('kvæg');
     expect(guidance).toContain('mastitis');
   });
 
   test('rejects unsupported jurisdiction', () => {
     const result = handleCheckCascadeRules(db, {
-      species: 'cattle',
+      species: 'kvæg',
       condition: 'test',
       jurisdiction: 'IE',
     });
@@ -63,8 +63,8 @@ describe('check_cascade_rules tool', () => {
 
   test('includes _meta', () => {
     const result = handleCheckCascadeRules(db, {
-      species: 'cattle',
-      condition: 'lameness',
+      species: 'kvæg',
+      condition: 'halthed',
     });
     expect(result).toHaveProperty('_meta');
   });

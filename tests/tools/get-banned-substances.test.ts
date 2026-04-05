@@ -32,11 +32,11 @@ describe('get_banned_substances tool', () => {
     expect(chlor).toBeDefined();
   });
 
-  test('includes criminal offence warning', () => {
+  test('includes strafbar handling warning', () => {
     const result = handleGetBannedSubstances(db, {});
     expect(result).toHaveProperty('warning');
     const warning = (result as { warning: string }).warning;
-    expect(warning).toContain('criminal offence');
+    expect(warning).toContain('strafbar');
   });
 
   test('rejects unsupported jurisdiction', () => {

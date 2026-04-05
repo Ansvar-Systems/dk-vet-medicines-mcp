@@ -8,16 +8,17 @@ export interface Meta {
 }
 
 const DISCLAIMER =
-  'This server provides guidance based on VMD published data. Withdrawal periods shown are for ' +
-  'standard dosing — always check the specific SPC for your product and dose. Wrong withdrawal ' +
-  'periods can lead to food chain contamination. Consult your veterinary surgeon for prescribing decisions.';
+  'Data er vejledende og baseret på offentligt tilgængelige kilder (Fødevarestyrelsen, Lægemiddelstyrelsen, DANMAP). ' +
+  'Tilbageholdelsestider er for standarddosering — kontrollér altid det specifikke produktresumé (SPC) for dit ' +
+  'præparat og dosis. Forkerte tilbageholdelsestider kan føre til restkoncentrationer i fødevarer. ' +
+  'Alle antibiotika kræver veterinærmæssig ordination. Kontakt din dyrlæge.';
 
 export function buildMeta(overrides?: Partial<Meta>): Meta {
   return {
     disclaimer: DISCLAIMER,
     data_age: overrides?.data_age ?? 'unknown',
-    source_url: overrides?.source_url ?? 'https://www.gov.uk/government/organisations/veterinary-medicines-directorate',
-    copyright: 'Data: Crown Copyright and VMD. Server: Apache-2.0 Ansvar Systems.',
+    source_url: overrides?.source_url ?? 'https://foedevarestyrelsen.dk/kvaeg/telefonisk-medicin/vetstat',
+    copyright: 'Data: Fødevarestyrelsen, Lægemiddelstyrelsen, DANMAP (SSI + DTU). Server: Apache-2.0 Ansvar Systems.',
     server: 'dk-vet-medicines-mcp',
     version: '0.1.0',
     ...overrides,

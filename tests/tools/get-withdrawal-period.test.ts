@@ -18,57 +18,45 @@ describe('get_withdrawal_period tool', () => {
     if (existsSync(TEST_DB)) unlinkSync(TEST_DB);
   });
 
-  test('returns correct meat withdrawal for Engemycin LA cattle', () => {
+  test('returns correct meat withdrawal for oxytetracyclin svin', () => {
     const result = handleGetWithdrawalPeriod(db, {
-      medicine_id: 'engemycin-la',
-      species: 'Cattle',
-      product_type: 'Meat',
+      medicine_id: 'oxytetracyclin',
+      species: 'svin',
+      product_type: 'kød',
     });
     expect(result).toHaveProperty('withdrawal_periods');
     const periods = (result as { withdrawal_periods: { period_days: number }[] }).withdrawal_periods;
     expect(periods).toHaveLength(1);
-    expect(periods[0].period_days).toBe(31);
+    expect(periods[0].period_days).toBe(14);
   });
 
-  test('returns correct milk withdrawal for Engemycin LA cattle', () => {
+  test('returns correct milk withdrawal for oxytetracyclin kvæg', () => {
     const result = handleGetWithdrawalPeriod(db, {
-      medicine_id: 'engemycin-la',
-      species: 'Cattle',
-      product_type: 'Milk',
+      medicine_id: 'oxytetracyclin',
+      species: 'kvæg',
+      product_type: 'mælk',
     });
     const periods = (result as { withdrawal_periods: { period_days: number }[] }).withdrawal_periods;
     expect(periods).toHaveLength(1);
     expect(periods[0].period_days).toBe(7);
   });
 
-  test('returns correct sheep meat withdrawal for Engemycin LA', () => {
+  test('returns correct meat withdrawal for ceftiofur kvæg', () => {
     const result = handleGetWithdrawalPeriod(db, {
-      medicine_id: 'engemycin-la',
-      species: 'Sheep',
-      product_type: 'Meat',
+      medicine_id: 'ceftiofur',
+      species: 'kvæg',
+      product_type: 'kød',
     });
     const periods = (result as { withdrawal_periods: { period_days: number }[] }).withdrawal_periods;
     expect(periods).toHaveLength(1);
-    expect(periods[0].period_days).toBe(21);
+    expect(periods[0].period_days).toBe(8);
   });
 
-  test('returns zero-day withdrawal for Excenel RTU milk', () => {
+  test('returns zero-day withdrawal for ceftiofur kvæg mælk', () => {
     const result = handleGetWithdrawalPeriod(db, {
-      medicine_id: 'excenel-rtu',
-      species: 'Cattle',
-      product_type: 'Milk',
-    });
-    const periods = (result as { withdrawal_periods: { period_days: number; zero_day_allowed: boolean }[] }).withdrawal_periods;
-    expect(periods).toHaveLength(1);
-    expect(periods[0].period_days).toBe(0);
-    expect(periods[0].zero_day_allowed).toBe(true);
-  });
-
-  test('returns zero-day for vaccine (Covexin 8)', () => {
-    const result = handleGetWithdrawalPeriod(db, {
-      medicine_id: 'covexin-8',
-      species: 'Cattle',
-      product_type: 'Meat',
+      medicine_id: 'ceftiofur',
+      species: 'kvæg',
+      product_type: 'mælk',
     });
     const periods = (result as { withdrawal_periods: { period_days: number; zero_day_allowed: boolean }[] }).withdrawal_periods;
     expect(periods).toHaveLength(1);
@@ -78,27 +66,27 @@ describe('get_withdrawal_period tool', () => {
 
   test('ALWAYS includes SPC warning', () => {
     const result = handleGetWithdrawalPeriod(db, {
-      medicine_id: 'engemycin-la',
-      species: 'Cattle',
+      medicine_id: 'oxytetracyclin',
+      species: 'svin',
     });
     expect(result).toHaveProperty('warning');
     const warning = (result as { warning: string }).warning;
     expect(warning).toContain('SPC');
-    expect(warning).toContain('food chain');
+    expect(warning).toContain('fødevarekæden');
   });
 
   test('returns not_found for invalid medicine', () => {
     const result = handleGetWithdrawalPeriod(db, {
       medicine_id: 'nonexistent',
-      species: 'Cattle',
+      species: 'svin',
     });
     expect(result).toHaveProperty('error', 'not_found');
   });
 
   test('returns no_withdrawal_period for unmatched species', () => {
     const result = handleGetWithdrawalPeriod(db, {
-      medicine_id: 'excenel-rtu',
-      species: 'Sheep',
+      medicine_id: 'ceftiofur',
+      species: 'får',
     });
     expect(result).toHaveProperty('error', 'no_withdrawal_period');
     expect(result).toHaveProperty('available_species');
@@ -106,9 +94,9 @@ describe('get_withdrawal_period tool', () => {
 
   test('rejects unsupported jurisdiction', () => {
     const result = handleGetWithdrawalPeriod(db, {
-      medicine_id: 'engemycin-la',
-      species: 'Cattle',
-      jurisdiction = 'DK',
+      medicine_id: 'oxytetracyclin',
+      species: 'svin',
+      jurisdiction: 'GB',
     });
     expect(result).toHaveProperty('error', 'jurisdiction_not_supported');
   });

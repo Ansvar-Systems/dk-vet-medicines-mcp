@@ -45,7 +45,7 @@ export function handleGetMedicineDetails(db: Database, args: MedicineDetailsArgs
       notes: wp.notes,
     })),
     _meta: buildMeta({
-      source_url: medicine.spc_url || 'https://www.vmd.defra.gov.uk/productinformationdatabase/',
+      source_url: medicine.spc_url || 'https://laegemiddelstyrelsen.dk/da/veterinaeromraadet/',
     }),
   };
 }

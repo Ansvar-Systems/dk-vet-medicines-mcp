@@ -8,113 +8,129 @@ export function createSeededDatabase(dbPath: string): Database {
     `INSERT INTO medicines (id, product_name, ma_number, active_substances, species_authorised,
      pharmaceutical_form, legal_category, ma_holder, spc_url, status, jurisdiction)
      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    ['engemycin-la', 'Engemycin LA', 'Vm 00057/4049', 'Oxytetracycline', 'Cattle, Sheep, Pigs',
-     'Solution for injection', 'POM-V', 'MSD Animal Health UK Ltd',
-     'https://www.vmd.defra.gov.uk/productinformationdatabase/spc.aspx', 'Authorised', 'GB']
+    ['oxytetracyclin', 'Engemycin vet. (oxytetracyclin)', 'DK/VP/0003', 'Oxytetracyclin', 'svin, kvæg',
+     'Injektionsvæske, opløsning', 'Receptpligtigt (Rx)', 'MSD Animal Health',
+     'https://www.dkma.dk/produktresume/engemycin', 'Godkendt', 'DK']
   );
   db.run(
     `INSERT INTO medicines (id, product_name, ma_number, active_substances, species_authorised,
      pharmaceutical_form, legal_category, ma_holder, spc_url, status, jurisdiction)
      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    ['excenel-rtu', 'Excenel RTU', 'Vm 42058/4017', 'Ceftiofur', 'Cattle, Pigs',
-     'Suspension for injection', 'POM-V', 'Zoetis UK Ltd',
-     'https://www.vmd.defra.gov.uk/productinformationdatabase/spc.aspx', 'Authorised', 'GB']
+    ['ceftiofur', 'Excenel vet. (ceftiofur)', 'DK/VP/0006', 'Ceftiofur', 'svin, kvæg',
+     'Injektionsvæske, suspension', 'Receptpligtigt (Rx) — kritisk vigtigt antibiotikum', 'Zoetis',
+     'https://www.dkma.dk/produktresume/excenel', 'Godkendt — restriktiv brug', 'DK']
   );
   db.run(
     `INSERT INTO medicines (id, product_name, ma_number, active_substances, species_authorised,
      pharmaceutical_form, legal_category, ma_holder, spc_url, status, jurisdiction)
      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    ['covexin-8', 'Covexin 8', 'Vm 00057/4066', 'Clostridial vaccine (8 antigens)', 'Cattle, Sheep',
-     'Suspension for injection', 'POM-VPS', 'MSD Animal Health UK Ltd',
-     'https://www.vmd.defra.gov.uk/productinformationdatabase/spc.aspx', 'Authorised', 'GB']
+    ['meloxicam', 'Metacam vet. (meloxicam)', 'EU/2/97/004', 'Meloxicam', 'svin, kvæg',
+     'Injektionsvæske, opløsning', 'Receptpligtigt (Rx)', 'Boehringer Ingelheim',
+     'https://www.ema.europa.eu/en/medicines/veterinary/EPAR/metacam', 'Godkendt', 'DK']
   );
 
   // Withdrawal periods
   db.run(
     `INSERT INTO withdrawal_periods (medicine_id, species, product_type, period_days, notes, zero_day_allowed, jurisdiction)
      VALUES (?, ?, ?, ?, ?, ?, ?)`,
-    ['engemycin-la', 'Cattle', 'Meat', 31, 'After last injection at recommended dose', 0, 'GB']
+    ['oxytetracyclin', 'svin', 'kød', 14, null, 0, 'DK']
   );
   db.run(
     `INSERT INTO withdrawal_periods (medicine_id, species, product_type, period_days, notes, zero_day_allowed, jurisdiction)
      VALUES (?, ?, ?, ?, ?, ?, ?)`,
-    ['engemycin-la', 'Cattle', 'Milk', 7, 'After last injection at recommended dose', 0, 'GB']
+    ['oxytetracyclin', 'kvæg', 'kød', 14, null, 0, 'DK']
   );
   db.run(
     `INSERT INTO withdrawal_periods (medicine_id, species, product_type, period_days, notes, zero_day_allowed, jurisdiction)
      VALUES (?, ?, ?, ?, ?, ?, ?)`,
-    ['engemycin-la', 'Sheep', 'Meat', 21, 'After last injection at recommended dose', 0, 'GB']
+    ['oxytetracyclin', 'kvæg', 'mælk', 7, 'Kontrollér SPC — varierer efter præparat', 0, 'DK']
   );
   db.run(
     `INSERT INTO withdrawal_periods (medicine_id, species, product_type, period_days, notes, zero_day_allowed, jurisdiction)
      VALUES (?, ?, ?, ?, ?, ?, ?)`,
-    ['excenel-rtu', 'Cattle', 'Meat', 8, 'After last injection', 0, 'GB']
+    ['ceftiofur', 'svin', 'kød', 5, '3. generations cefalosporin — skriftlig begrundelse påkrævet.', 0, 'DK']
   );
   db.run(
     `INSERT INTO withdrawal_periods (medicine_id, species, product_type, period_days, notes, zero_day_allowed, jurisdiction)
      VALUES (?, ?, ?, ?, ?, ?, ?)`,
-    ['excenel-rtu', 'Cattle', 'Milk', 0, 'Zero withdrawal for milk at recommended dose', 1, 'GB']
+    ['ceftiofur', 'kvæg', 'kød', 8, '3. generations cefalosporin — skriftlig begrundelse påkrævet.', 0, 'DK']
   );
   db.run(
     `INSERT INTO withdrawal_periods (medicine_id, species, product_type, period_days, notes, zero_day_allowed, jurisdiction)
      VALUES (?, ?, ?, ?, ?, ?, ?)`,
-    ['covexin-8', 'Cattle', 'Meat', 0, 'Zero days', 1, 'GB']
+    ['ceftiofur', 'kvæg', 'mælk', 0, 'Nul dage — kontrollér SPC for specifikke indikationer', 1, 'DK']
   );
   db.run(
     `INSERT INTO withdrawal_periods (medicine_id, species, product_type, period_days, notes, zero_day_allowed, jurisdiction)
      VALUES (?, ?, ?, ?, ?, ?, ?)`,
-    ['covexin-8', 'Cattle', 'Milk', 0, 'Zero days', 1, 'GB']
+    ['meloxicam', 'svin', 'kød', 5, 'NSAID — smertelindring', 0, 'DK']
+  );
+  db.run(
+    `INSERT INTO withdrawal_periods (medicine_id, species, product_type, period_days, notes, zero_day_allowed, jurisdiction)
+     VALUES (?, ?, ?, ?, ?, ?, ?)`,
+    ['meloxicam', 'kvæg', 'kød', 5, 'NSAID — smertelindring', 0, 'DK']
+  );
+  db.run(
+    `INSERT INTO withdrawal_periods (medicine_id, species, product_type, period_days, notes, zero_day_allowed, jurisdiction)
+     VALUES (?, ?, ?, ?, ?, ?, ?)`,
+    ['meloxicam', 'kvæg', 'mælk', 5, 'NSAID — kontrollér SPC', 0, 'DK']
   );
 
   // Banned substances
   db.run(
     `INSERT INTO banned_substances (substance, category, applies_to, regulation_ref, jurisdiction)
      VALUES (?, ?, ?, ?, ?)`,
-    ['Chloramphenicol', 'Prohibited antibiotic', 'All food-producing animals',
-     'Commission Regulation (EU) No 37/2010, Table 2', 'GB']
+    ['Chloramphenicol', 'Forbudt i fødevareproducerende dyr', 'alle fødevareproducerende dyr',
+     'EU Forordning 37/2010 (Tabel 2), EU Forordning 2019/6', 'DK']
   );
   db.run(
     `INSERT INTO banned_substances (substance, category, applies_to, regulation_ref, jurisdiction)
      VALUES (?, ?, ?, ?, ?)`,
-    ['Metronidazole', 'Nitroimidazole', 'All food-producing animals',
-     'Commission Regulation (EU) No 37/2010, Table 2', 'GB']
+    ['Metronidazol', 'Forbudt i fødevareproducerende dyr', 'alle fødevareproducerende dyr',
+     'EU Forordning 37/2010 (Tabel 2)', 'DK']
+  );
+  db.run(
+    `INSERT INTO banned_substances (substance, category, applies_to, regulation_ref, jurisdiction)
+     VALUES (?, ?, ?, ?, ?)`,
+    ['Carbapenemer (meropenem, imipenem, ertapenem)', 'Forbudt i veterinærmedicin', 'alle fødevareproducerende dyr',
+     'EU Forordning 2019/6 art. 37(5), Fødevarestyrelsens bekendtgørelse', 'DK']
   );
 
   // Cascade rules
   db.run(
     `INSERT INTO cascade_rules (step_order, description, documentation_required, default_withdrawal_meat_days, default_withdrawal_milk_days, source, jurisdiction)
      VALUES (?, ?, ?, ?, ?, ?, ?)`,
-    [1, 'Use a veterinary medicine authorised in the UK for use in that species for that condition.',
-     'Standard medicine record only.', null, null, 'Veterinary Medicines Regulations 2013', 'GB']
+    [1, 'Brug et veterinærlægemiddel godkendt i Danmark til den pågældende dyreart og indikation.',
+     'Standardrecept. Opbevar i medicinlogbog.', null, null, 'EU Forordning 2019/6 art. 112-114', 'DK']
   );
   db.run(
     `INSERT INTO cascade_rules (step_order, description, documentation_required, default_withdrawal_meat_days, default_withdrawal_milk_days, source, jurisdiction)
      VALUES (?, ?, ?, ?, ?, ?, ?)`,
-    [2, 'A veterinary medicine authorised in the UK for use in another animal species or for another condition.',
-     'Vet must document the rationale.', 28, 7, 'Veterinary Medicines Regulations 2013', 'GB']
+    [2, 'Brug et veterinærlægemiddel godkendt i Danmark til en anden dyreart eller anden indikation hos samme dyreart.',
+     'Dyrlægen skal dokumentere, at trin 1 ikke var muligt. Skriftlig begrundelse i journal.', 28, 7, 'EU Forordning 2019/6 art. 113(1)(a)', 'DK']
   );
 
   // Record requirements
   db.run(
     `INSERT INTO record_requirements (holding_type, species, requirement, retention_period, regulation_ref, jurisdiction)
      VALUES (?, ?, ?, ?, ?, ?)`,
-    ['All food-producing animal holdings', 'All food-producing animals',
-     'Record: medicine name, batch number, date(s) of administration, quantity administered, identity of treated animal(s), withdrawal period end date.',
-     '5 years', 'Veterinary Medicines Regulations 2013, Regulation 19', 'GB']
+    ['svinebesætning', 'svin',
+     'Medicinlogbog: dato, dyr (ID/gruppe), præparat, dosis, behandlingsperiode, tilbageholdelsestid, dyrlæge.',
+     '5 år', 'Bekendtgørelse om registrering af lægemidler til dyr §4', 'DK']
   );
 
   // FTS5 search index
   db.run(
     `INSERT INTO search_index (title, body, species, jurisdiction) VALUES (?, ?, ?, ?)`,
-    ['Engemycin LA', 'Engemycin LA (Oxytetracycline). Solution for injection. Cattle meat: 31 days. Cattle milk: 7 days. Sheep meat: 21 days.', 'Cattle, Sheep, Pigs', 'GB']
+    ['Engemycin vet. (oxytetracyclin)', 'Oxytetracyclin. Antibiotikum — tetracyclin. Svin kød: 14 dage. Kvæg kød: 14 dage. Kvæg mælk: 7 dage.', 'svin, kvæg', 'DK']
   );
   db.run(
     `INSERT INTO search_index (title, body, species, jurisdiction) VALUES (?, ?, ?, ?)`,
-    ['Excenel RTU', 'Excenel RTU (Ceftiofur). Suspension for injection. Cattle meat: 8 days. Cattle milk: 0 days (zero withdrawal).', 'Cattle, Pigs', 'GB']
+    ['Excenel vet. (ceftiofur)', 'Ceftiofur. Antibiotikum — 3. generations cefalosporin (kritisk vigtigt). Svin kød: 5 dage. Kvæg kød: 8 dage. Kvæg mælk: 0 dage.', 'svin, kvæg', 'DK']
   );
   db.run(
     `INSERT INTO search_index (title, body, species, jurisdiction) VALUES (?, ?, ?, ?)`,
-    ['Banned substance: Chloramphenicol', 'Chloramphenicol — Prohibited antibiotic. Applies to: All food-producing animals.', 'All food-producing animals', 'GB']
+    ['Forbudt/restriktivt stof: Chloramphenicol', 'Forbudt i fødevareproducerende dyr. Gælder: alle fødevareproducerende dyr.', 'alle fødevareproducerende dyr', 'DK']
   );
 
   return db;

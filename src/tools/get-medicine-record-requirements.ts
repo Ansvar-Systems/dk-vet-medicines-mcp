@@ -47,7 +47,7 @@ export function handleGetMedicineRecordRequirements(db: Database, args: RecordRe
       regulation_ref: r.regulation_ref,
     })),
     _meta: buildMeta({
-      source_url: 'https://www.legislation.gov.uk/uksi/2013/2033/contents',
+      source_url: 'https://foedevarestyrelsen.dk/kvaeg/telefonisk-medicin/vetstat',
     }),
   };
 }

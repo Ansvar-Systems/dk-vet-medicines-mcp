@@ -3,17 +3,20 @@ import { SUPPORTED_JURISDICTIONS } from '../jurisdiction.js';
 
 export function handleAbout() {
   return {
-    name: 'Denmark Vet Medicines MCP',
+    name: 'Danish Veterinary Medicines MCP',
     description:
-      'UK veterinary medicines data from the Veterinary Medicines Directorate (VMD). ' +
+      'Danish veterinary medicines data from Fødevarestyrelsen and Lægemiddelstyrelsen. ' +
       'Covers authorised products, withdrawal periods for food-producing animals, ' +
-      'cascade prescribing rules, banned substances, and record-keeping requirements.',
+      'cascade prescribing rules (kaskadereglen), banned/restricted substances, ' +
+      'Gul Kort (Yellow Card) antibiotic thresholds, SRA obligations, ' +
+      'DANMAP resistance data, and record-keeping requirements.',
     version: '0.1.0',
     jurisdiction: [...SUPPORTED_JURISDICTIONS],
     data_sources: [
-      'VMD Product Information Database',
-      'Veterinary Medicines Regulations 2013',
-      'DEFRA Veterinary Cascade Guidance',
+      'Fødevarestyrelsen VetStat',
+      'Lægemiddelstyrelsen',
+      'DANMAP (SSI + DTU)',
+      'SEGES Innovation',
     ],
     tools_count: 10,
     links: {

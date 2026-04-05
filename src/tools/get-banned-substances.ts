@@ -46,11 +46,11 @@ export function handleGetBannedSubstances(db: Database, args: BannedSubstancesAr
       applies_to: s.applies_to,
       regulation_ref: s.regulation_ref,
     })),
-    warning: 'Use of banned substances in food-producing animals is a criminal offence under ' +
-      'the Veterinary Medicines Regulations 2013 and EU-derived retained legislation. ' +
-      'Penalties include prosecution, product recalls, and holding movement restrictions.',
+    warning: 'Brug af forbudte stoffer i fødevareproducerende dyr er en strafbar handling under ' +
+      'EU Forordning 2019/6 og dansk lovgivning. Konsekvenser omfatter strafansvar, ' +
+      'tilbagekaldelse af produkter og besætningsrestriktioner.',
     _meta: buildMeta({
-      source_url: 'https://www.legislation.gov.uk/uksi/2013/2033/contents',
+      source_url: 'https://eur-lex.europa.eu/eli/reg/2019/6/oj',
     }),
   };
 }

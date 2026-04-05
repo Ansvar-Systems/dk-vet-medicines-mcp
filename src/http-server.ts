@@ -86,7 +86,7 @@ const TOOLS = [
   },
   {
     name: 'search_authorised_medicines',
-    description: 'Search VMD-authorised veterinary medicines. Full-text search across product names, active substances, and species. Use for broad queries.',
+    description: 'Search Danish-authorised veterinary medicines. Full-text search across product names, active substances, and species. Use for broad queries.',
     inputSchema: {
       type: 'object' as const,
       properties: {
@@ -94,7 +94,7 @@ const TOOLS = [
         species: { type: 'string', description: 'Filter by species (e.g. cattle, sheep, pigs)' },
         pharmaceutical_form: { type: 'string', description: 'Filter by form (e.g. injection, intramammary)' },
         active_substance: { type: 'string', description: 'Filter by active substance (e.g. oxytetracycline)' },
-        jurisdiction: { type: 'string', description: 'ISO 3166-1 alpha-2 code (default: GB)' },
+        jurisdiction: { type: 'string', description: 'ISO 3166-1 alpha-2 code (default: DK)' },
         limit: { type: 'number', description: 'Max results (default: 20, max: 50)' },
       },
       required: ['query'],
@@ -107,7 +107,7 @@ const TOOLS = [
       type: 'object' as const,
       properties: {
         medicine_id: { type: 'string', description: 'Medicine ID (use search_authorised_medicines to find IDs)' },
-        jurisdiction: { type: 'string', description: 'ISO 3166-1 alpha-2 code (default: GB)' },
+        jurisdiction: { type: 'string', description: 'ISO 3166-1 alpha-2 code (default: DK)' },
       },
       required: ['medicine_id'],
     },
@@ -121,7 +121,7 @@ const TOOLS = [
         medicine_id: { type: 'string', description: 'Medicine ID' },
         species: { type: 'string', description: 'Target species (e.g. cattle, sheep, pigs)' },
         product_type: { type: 'string', description: 'Product type (e.g. meat, milk)' },
-        jurisdiction: { type: 'string', description: 'ISO 3166-1 alpha-2 code (default: GB)' },
+        jurisdiction: { type: 'string', description: 'ISO 3166-1 alpha-2 code (default: DK)' },
       },
       required: ['medicine_id', 'species'],
     },
@@ -134,7 +134,7 @@ const TOOLS = [
       properties: {
         species: { type: 'string', description: 'Target species' },
         condition: { type: 'string', description: 'Clinical condition being treated' },
-        jurisdiction: { type: 'string', description: 'ISO 3166-1 alpha-2 code (default: GB)' },
+        jurisdiction: { type: 'string', description: 'ISO 3166-1 alpha-2 code (default: DK)' },
       },
       required: ['species', 'condition'],
     },
@@ -147,7 +147,7 @@ const TOOLS = [
       properties: {
         species: { type: 'string', description: 'Filter by species' },
         holding_type: { type: 'string', description: 'Filter by holding type (e.g. farm, smallholding)' },
-        jurisdiction: { type: 'string', description: 'ISO 3166-1 alpha-2 code (default: GB)' },
+        jurisdiction: { type: 'string', description: 'ISO 3166-1 alpha-2 code (default: DK)' },
       },
     },
   },
@@ -159,7 +159,7 @@ const TOOLS = [
       properties: {
         active_substance: { type: 'string', description: 'Active substance name (e.g. oxytetracycline, meloxicam)' },
         species: { type: 'string', description: 'Filter by authorised species' },
-        jurisdiction: { type: 'string', description: 'ISO 3166-1 alpha-2 code (default: GB)' },
+        jurisdiction: { type: 'string', description: 'ISO 3166-1 alpha-2 code (default: DK)' },
       },
       required: ['active_substance'],
     },
@@ -172,7 +172,7 @@ const TOOLS = [
       properties: {
         species: { type: 'string', description: 'Filter by species' },
         production_type: { type: 'string', description: 'Filter by production type (e.g. food-producing, growth promotion)' },
-        jurisdiction: { type: 'string', description: 'ISO 3166-1 alpha-2 code (default: GB)' },
+        jurisdiction: { type: 'string', description: 'ISO 3166-1 alpha-2 code (default: DK)' },
       },
     },
   },

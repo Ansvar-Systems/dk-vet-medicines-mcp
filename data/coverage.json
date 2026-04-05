@@ -1,6 +1,19 @@
 {
-  "mcp_name": "Denmark Vet Medicines MCP",
+  "mcp_name": "Danish Veterinary Medicines MCP",
   "jurisdiction": "DK",
   "build_date": "2026-04-05",
-  "status": "template — data not yet populated"
+  "status": "populated",
+  "medicines_count": 11,
+  "withdrawal_periods_count": 31,
+  "banned_substances_count": 11,
+  "cascade_rules_count": 4,
+  "record_requirements_count": 10,
+  "fts_entries": 46,
+  "data_sources": [
+    "Fødevarestyrelsen VetStat",
+    "Lægemiddelstyrelsen (DK)",
+    "DANMAP (SSI + DTU)",
+    "SEGES Innovation"
+  ],
+  "disclaimer": "Data er vejledende. Alle antibiotika kræver veterinærmæssig ordination. Kontakt din dyrlæge."
 }

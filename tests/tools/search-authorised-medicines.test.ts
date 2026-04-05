@@ -18,24 +18,24 @@ describe('search_authorised_medicines tool', () => {
     if (existsSync(TEST_DB)) unlinkSync(TEST_DB);
   });
 
-  test('returns results for oxytetracycline query', () => {
-    const result = handleSearchAuthorisedMedicines(db, { query: 'oxytetracycline' });
+  test('returns results for oxytetracyclin query', () => {
+    const result = handleSearchAuthorisedMedicines(db, { query: 'oxytetracyclin' });
     expect(result).toHaveProperty('medicines');
     const medicines = (result as { medicines: unknown[] }).medicines;
     expect(medicines.length).toBeGreaterThan(0);
   });
 
   test('returns FTS results for broad search', () => {
-    const result = handleSearchAuthorisedMedicines(db, { query: 'injection' });
+    const result = handleSearchAuthorisedMedicines(db, { query: 'antibiotikum' });
     expect(result).toHaveProperty('fts_results');
   });
 
   test('filters by species', () => {
-    const result = handleSearchAuthorisedMedicines(db, { query: 'Engemycin', species: 'cattle' });
+    const result = handleSearchAuthorisedMedicines(db, { query: 'Engemycin', species: 'kvæg' });
     expect(result).toHaveProperty('medicines');
     const medicines = (result as { medicines: { species_authorised: string }[] }).medicines;
     for (const m of medicines) {
-      expect(m.species_authorised.toLowerCase()).toContain('cattle');
+      expect(m.species_authorised.toLowerCase()).toContain('kvæg');
     }
   });
 

@@ -35,12 +35,12 @@ export function handleCheckCascadeRules(db: Database, args: CascadeArgs) {
       },
       source: r.source,
     })),
-    guidance: 'The cascade applies when no veterinary medicine is authorised in the UK for the ' +
-      `species (${args.species}) and condition (${args.condition}). The veterinary surgeon must ` +
-      'follow the steps in order. When using the cascade, minimum statutory withdrawal periods ' +
-      'apply unless longer periods are specified in the product SPC.',
+    guidance: `Kaskadereglen gælder, når intet veterinærlægemiddel er godkendt i Danmark til ` +
+      `den pågældende dyreart (${args.species}) og indikation (${args.condition}). Dyrlægen skal ` +
+      'følge trinene i rækkefølge. Ved brug af kaskaden gælder lovbestemte ' +
+      'minimumstilbageholdelsestider, medmindre længere perioder er angivet i produktresuméet (SPC).',
     _meta: buildMeta({
-      source_url: 'https://www.gov.uk/guidance/the-cascade-prescribing-unauthorised-medicines',
+      source_url: 'https://eur-lex.europa.eu/eli/reg/2019/6/oj',
     }),
   };
 }
