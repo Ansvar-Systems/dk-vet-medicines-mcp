@@ -54,7 +54,7 @@ function initSchema(db: BetterSqlite3.Database): void {
       therapeutic_group TEXT,
       spc_url TEXT,
       status TEXT,
-      jurisdiction = 'DK'
+      jurisdiction TEXT DEFAULT 'DK'
     );
 
     CREATE TABLE IF NOT EXISTS withdrawal_periods (
@@ -65,7 +65,7 @@ function initSchema(db: BetterSqlite3.Database): void {
       period_days INTEGER NOT NULL,
       notes TEXT,
       zero_day_allowed INTEGER DEFAULT 0,
-      jurisdiction = 'DK',
+      jurisdiction TEXT DEFAULT 'DK',
       UNIQUE(medicine_id, species, product_type, jurisdiction)
     );
 
@@ -75,7 +75,7 @@ function initSchema(db: BetterSqlite3.Database): void {
       category TEXT,
       applies_to TEXT,
       regulation_ref TEXT,
-      jurisdiction = 'DK'
+      jurisdiction TEXT DEFAULT 'DK'
     );
 
     CREATE TABLE IF NOT EXISTS cascade_rules (
@@ -86,7 +86,7 @@ function initSchema(db: BetterSqlite3.Database): void {
       default_withdrawal_meat_days INTEGER,
       default_withdrawal_milk_days INTEGER,
       source TEXT,
-      jurisdiction = 'DK'
+      jurisdiction TEXT DEFAULT 'DK'
     );
 
     CREATE TABLE IF NOT EXISTS record_requirements (
@@ -96,7 +96,7 @@ function initSchema(db: BetterSqlite3.Database): void {
       requirement TEXT NOT NULL,
       retention_period TEXT,
       regulation_ref TEXT,
-      jurisdiction = 'DK'
+      jurisdiction TEXT DEFAULT 'DK'
     );
 
     CREATE VIRTUAL TABLE IF NOT EXISTS search_index USING fts5(
@@ -110,7 +110,7 @@ function initSchema(db: BetterSqlite3.Database): void {
 
     INSERT OR IGNORE INTO db_metadata (key, value) VALUES ('schema_version', '1.1');
     INSERT OR IGNORE INTO db_metadata (key, value) VALUES ('mcp_name', 'Denmark Vet Medicines MCP');
-    INSERT OR IGNORE INTO db_metadata (key, value) VALUES ('jurisdiction = 'DK');
+    INSERT OR IGNORE INTO db_metadata (key, value) VALUES ('jurisdiction', 'DK');
   `);
 }
 
