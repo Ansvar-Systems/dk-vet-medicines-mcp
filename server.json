@@ -1,0 +1,16 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.Ansvar-Systems/uk-vet-medicines",
+  "description": "UK veterinary medicines \u2014 VMD database, withdrawal periods, cascade rules",
+  "repository": {
+    "url": "https://github.com/Ansvar-Systems/uk-vet-medicines-mcp",
+    "source": "github"
+  },
+  "version": "0.1.0",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.ansvar.eu/uk-vet-medicines/mcp"
+    }
+  ]
+}
