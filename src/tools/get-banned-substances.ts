@@ -1,4 +1,5 @@
 import { buildMeta } from '../metadata.js';
+import { buildCitation } from '../citation.js';
 import { validateJurisdiction } from '../jurisdiction.js';
 import type { Database } from '../db.js';
 
@@ -52,5 +53,15 @@ export function handleGetBannedSubstances(db: Database, args: BannedSubstancesAr
     _meta: buildMeta({
       source_url: 'https://eur-lex.europa.eu/eli/reg/2019/6/oj',
     }),
+    _citation: buildCitation(
+      `banned-substances:${args.species ?? 'all'}`,
+      `Banned substances${args.species ? ` (${args.species})` : ''}`,
+      'get_banned_substances',
+      {
+        ...(args.species ? { species: args.species } : {}),
+        ...(args.production_type ? { production_type: args.production_type } : {}),
+      },
+      'https://eur-lex.europa.eu/eli/reg/2019/6/oj',
+    ),
   };
 }

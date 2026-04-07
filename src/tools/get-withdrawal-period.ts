@@ -1,4 +1,5 @@
 import { buildMeta } from '../metadata.js';
+import { buildCitation } from '../citation.js';
 import { validateJurisdiction } from '../jurisdiction.js';
 import type { Database } from '../db.js';
 
@@ -86,5 +87,12 @@ export function handleGetWithdrawalPeriod(db: Database, args: WithdrawalPeriodAr
     _meta: buildMeta({
       source_url: medicine.spc_url || 'https://laegemiddelstyrelsen.dk/da/veterinaeromraadet/',
     }),
+    _citation: buildCitation(
+      `${medicine.product_name}:withdrawal:${args.species}`,
+      `Withdrawal period: ${medicine.product_name} (${args.species})`,
+      'get_withdrawal_period',
+      { medicine_id: args.medicine_id, species: args.species },
+      medicine.spc_url || 'https://laegemiddelstyrelsen.dk/da/veterinaeromraadet/',
+    ),
   };
 }
