@@ -1,4 +1,5 @@
 import { buildMeta } from '../metadata.js';
+import { buildCitation } from '../citation.js';
 import { validateJurisdiction } from '../jurisdiction.js';
 import type { Database } from '../db.js';
 
@@ -47,5 +48,12 @@ export function handleGetMedicineDetails(db: Database, args: MedicineDetailsArgs
     _meta: buildMeta({
       source_url: medicine.spc_url || 'https://laegemiddelstyrelsen.dk/da/veterinaeromraadet/',
     }),
+    _citation: buildCitation(
+      medicine.ma_number || medicine.id,
+      `${medicine.product_name} (${medicine.ma_number || medicine.id})`,
+      'get_medicine_details',
+      { medicine_id: args.medicine_id },
+      medicine.spc_url || 'https://laegemiddelstyrelsen.dk/da/veterinaeromraadet/',
+    ),
   };
 }

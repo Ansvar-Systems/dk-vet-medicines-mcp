@@ -1,4 +1,5 @@
 import { buildMeta } from '../metadata.js';
+import { buildCitation } from '../citation.js';
 import { validateJurisdiction } from '../jurisdiction.js';
 import type { Database } from '../db.js';
 
@@ -49,5 +50,15 @@ export function handleGetMedicineRecordRequirements(db: Database, args: RecordRe
     _meta: buildMeta({
       source_url: 'https://foedevarestyrelsen.dk/kvaeg/telefonisk-medicin/vetstat',
     }),
+    _citation: buildCitation(
+      `record-requirements:${args.species ?? 'all'}:${args.holding_type ?? 'all'}`,
+      `Medicine record requirements${args.species ? ` (${args.species})` : ''}`,
+      'get_medicine_record_requirements',
+      {
+        ...(args.species ? { species: args.species } : {}),
+        ...(args.holding_type ? { holding_type: args.holding_type } : {}),
+      },
+      'https://foedevarestyrelsen.dk/kvaeg/telefonisk-medicin/vetstat',
+    ),
   };
 }
